@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Yeet',
+    date: 'April 8th, 2020',
+    firstParagraph: 'LAOLDOALSODAOLDOSALDOLAOSD',
+    secondParagraph: 'asdasdaJSUIDJASUIDJUIAJdu GGAGAGAGAGAGAGA',
+    thirdParagraph: 'ADsdsadasdasda'
   }
 ];
 
@@ -107,8 +114,50 @@ const data = [
 
   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+function newArticle(title, date, firstParagraph, secondParagraph, thirdParagraph){
+  //Creation of elements
+  const div=document.createElement('div');
+  const h2=document.createElement('h2');
+  const pDate=document.createElement('p');
+  const pFirst=document.createElement('p');
+  const pSecond=document.createElement('p');
+  const pThird=document.createElement('p');
+  const span=document.createElement('span');
+
+  //Setting the Hierarchy of the Elements
+  div.appendChild(h2);
+  div.appendChild(pDate);
+  div.appendChild(pFirst);
+  div.appendChild(pThird);
+  div.appendChild(span);
+
+  //Applying Arguments as textContent
+  h2.textContent=title;
+  pDate.textContent=date;
+  pFirst.textContent=firstParagraph;
+  pSecond.textContent=secondParagraph;
+  pThird.textContent=thirdParagraph;
+  span.textContent='More'
+
+  //Adding required classes.
+  div.classList.add('article');
+  pDate.classList.add('date');
+  span.classList.add('expandButton');
+
+  //Event Listener
+  span.addEventListener('click', function(){
+      div.classList.toggle('article-open')
+  })
+
+  return div;
+}
+
+const articlesContainer=document.querySelector('.articles');
+const articles=data.map(function(article){
+  articlesContainer.appendChild(newArticle(article.title, article.date, article.firstParagraph, article.secondParagraph, article.thirdParagraph))
+})
